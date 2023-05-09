@@ -1,0 +1,48 @@
+﻿@model FinalProject.Models.Lecturer
+
+@{
+    ViewData["Title"] = "Detalji o predavaču";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>Lecturer</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Ime i prezime:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            Kratka biografija:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bio)
+        </dd>
+        <dt class = "col-sm-2">
+            Kontakt email:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ContactEmail)
+        </dd>
+        <dt class = "col-sm-2">
+            Slika:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+        <dd class= "col-sm-10">
+            @{
+                string setImage = !String.IsNullOrEmpty(Model.Image) ? "~/images/lecturers/" + Model.Image : "~/images/default-placeholder.png";
+            }
+            <img src="@Url.Content(setImage)" alt="Slika predavača" width="384" height="256">
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" class="btn btn-success" asp-route-id="@Model?.Id">Uredi</a>
+    <a asp-action="Index" class="btn btn-outline-primary">Popis predavača</a>
+</div>

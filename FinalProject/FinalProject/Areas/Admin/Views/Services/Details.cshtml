@@ -1,0 +1,65 @@
+﻿@model FinalProject.Models.Services
+
+@using Microsoft.AspNetCore.Identity;
+@using FinalProject.Areas.Identity.Data;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Detalji o instrukcijama";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h3>Opis usluge</h3>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2"></dt>
+        <dd>
+            @{
+                string setImage = !String.IsNullOrEmpty(Model.Lecturer.Image) ? "~/images/lecturers/" + Model.Lecturer.Image : "~/images/default-placeholder.png";
+            }
+            <img src="@Url.Content(setImage)" alt="Slika predavača" width="384" height="256">
+        </dd>
+        <dt class = "col-sm-2">
+            Naziv predmeta:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            Cijena po satu:
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Price.ToString("C2")
+        </dd>
+        <dt class = "col-sm-2">
+            Kratki opis:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            Predavač:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Lecturer.Title)
+        </dd>       
+        <dt class= "col-sm-2">
+            Kontakt predavača:
+        </dt>
+        <dd class= "col-sm-10">
+            @Html.DisplayFor(model => model.Lecturer.ContactEmail)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+    {
+        <a asp-action="Edit" class="btn btn-success" asp-route-id="@Model?.Id">Uredi</a> 
+        <a asp-action="Index" class="btn btn-outline-primary">Popis predmeta</a>        
+    }
+    <a asp-action="Index" class="btn btn-outline-secondary" asp-area="" asp-controller="Home">Povratak na početnu stranicu</a>
+</div>

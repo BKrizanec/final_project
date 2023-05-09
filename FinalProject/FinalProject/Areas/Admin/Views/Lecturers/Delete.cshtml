@@ -1,0 +1,45 @@
+﻿@model FinalProject.Models.Lecturer
+
+@{
+    ViewData["Title"] = "Obriši predavača";
+    ViewData["Directions"] = "Jeste li sigurni da želite obrisati ovoga predavača?";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>@ViewData["Directions"]</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Ime i prezime:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            Kratka biografija:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bio)
+        </dd>
+        <dt class = "col-sm-2">
+            Kontakt email:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ContactEmail)
+        </dd>
+        <dt class = "col-sm-2">
+            Slika:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Obriši" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-outline-primary">Popis predavača</a>
+    </form>
+</div>

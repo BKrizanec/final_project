@@ -1,0 +1,18 @@
+﻿@using FinalProject.Areas.Identity.Data;
+
+@inject ApplicationDbContext _dbContext
+
+<div class="form-group">
+    <label class="control-label">Označite ulogu korisnika</label>
+    <select class="form-control" name="roleId">
+        @foreach (var roleName in _dbContext.Roles)
+        {
+            <!option value="@roleName.Id"
+            @if (ViewBag.Roles != null)
+            {
+                @(ViewBag.Roles.Contains(roleName.Id) ? "selected" : "")
+
+            }>@roleName.Name</!option>
+        }
+    </select>
+</div>

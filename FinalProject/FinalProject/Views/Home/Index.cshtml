@@ -1,0 +1,58 @@
+﻿@model List<FinalProject.Models.Services>
+@using FinalProject.Areas.Identity.Data;
+@inject ApplicationDbContext _dbContext
+
+@{
+    ViewData["Title"] = "Dobro došli na Instrukcije";
+    ViewData["Description"] = "Označite kategoriju, ili direktno potražite predmet. Sretno sa instrukcijama!";
+    ViewData["ErrorMessage"] = "Vaša pretraga nije dala rezultate";
+}
+
+<div class="text-center">
+    <h1>@ViewData["Title"]</h1>
+    <p>@ViewData["Description"]</p>
+</div>
+
+<form method="get" asp-area="" asp-controller="Home" asp-action="Index" class="row mb-5">
+
+    <div class="col-3">
+        <input type="text" class="form-control" name="searchQuery" />
+    </div>
+
+    <div class="col-3">
+        <select class="form-select" name="servicesByCategories">
+            <option value="0">Sve kategorije</option>
+            <option value="1">Državna matura</option>
+            <option value="2">Osnovna škola</option>
+            <option value="3">Srednja škola</option>
+            <option value="4">Ostalo</option>
+        </select>
+    </div>
+
+    <div class="col-3">
+        <input type="submit" class="btn btn-success" value="Pretraži..." />
+    </div>    
+</form>
+
+<div class="row mb-5">
+    <form asp-action="Index" asp-controller="Home" method="get">
+        <input type="hidden" class="form-control" name="selectAll" value="true" />
+        <input type="submit" class="btn btn-success" value="Prikaži sve instrukcije" />
+    </form>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card col-4 mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@item.Title</h5>
+                <p class="card-text">@item.Description</p>
+                <h6 class="card-title">Cijena po satu: </h6>
+                <p class="card-text">@item.Price.ToString("C2")</p>
+            </div>
+            <a asp-action="Details" class="btn btn-outline-success btn-sm" style="border-style:groove" asp-area="admin" asp-controller="Services" asp-route-id="@item.Id">Detaljnije...</a>
+        </div>
+    }
+</div>
+

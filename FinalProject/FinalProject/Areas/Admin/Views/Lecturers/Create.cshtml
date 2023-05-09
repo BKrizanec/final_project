@@ -1,0 +1,43 @@
+﻿@model FinalProject.Models.Lecturer
+
+@{
+    ViewData["Title"] = "Dodaj novog predavača";
+    ViewData["Description"] = "Ispunite obrazac kako bi dodali novog predavača";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>@ViewData["Description"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Ime i prezime</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bio" class="control-label">Kratka biografija</label>
+                <input asp-for="Bio" class="form-control" />
+                <span asp-validation-for="Bio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactEmail" class="control-label">Kontakt email</label>
+                <input asp-for="ContactEmail" class="form-control" />
+                <span asp-validation-for="ContactEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Slika</label>
+                <input type="file" asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dodaj predavača" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-primary">Popis predavača</a>
+            </div>
+        </form>
+    </div>
+</div>
+

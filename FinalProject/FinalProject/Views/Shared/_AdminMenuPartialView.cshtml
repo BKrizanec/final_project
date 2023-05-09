@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using FinalProject.Areas.Identity.Data;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+{
+    <div class="dropdown">
+        <a class="btn nav-link dropdown-toggle" id="dropdownAdmin" data-bs-toggle="dropdown">
+            Admin
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" type="button" asp-area="admin" asp-controller="categories" asp-action="index">
+                    Categories
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" type="button" asp-area="admin" asp-controller="services" asp-action="index">
+                    Services
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" type="button" asp-area="admin" asp-controller="lecturers" asp-action="index">
+                    Lecturers
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" type="button" asp-area="admin" asp-controller="users" asp-action="index">
+                    Users
+                </a>
+            </li>
+        </ul>
+    </div>
+}

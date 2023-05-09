@@ -1,0 +1,42 @@
+﻿@model FinalProject.Models.Category
+
+@{
+    ViewData["Title"] = "Kreiraj novu kategoriju";
+    ViewData["Directions"] = "Ispunite formu kako bi kreirali novu kategoriju";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>@ViewData["Directions"]</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Naziv kategorije</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Opis kategorije</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Slika kategorije</label>
+                <input type="file" asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dodaj kategoriju" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-primary">Popis kategorija</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

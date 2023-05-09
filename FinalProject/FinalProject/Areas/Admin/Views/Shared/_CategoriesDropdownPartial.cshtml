@@ -1,0 +1,18 @@
+﻿@using FinalProject.Areas.Identity.Data;
+
+@inject ApplicationDbContext _dbContext
+
+<div class="form-group">
+    <label class="control-label">Označite kategoriju predmeta</label>
+    <select class="form-control" name="categoryIds[]" multiple>
+        @foreach(var categoryItem in _dbContext.Categories.ToList())
+        {
+            <!option value="@categoryItem.Id"
+            @if(ViewBag.ServiceCategories != null)
+            {
+                @(ViewBag.ServiceCategories.Contains(categoryItem.Id) ? "selected" : "")
+
+            }>@categoryItem.Title</!option>
+        }
+    </select>
+</div>

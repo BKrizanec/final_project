@@ -1,0 +1,19 @@
+﻿@using FinalProject.Areas.Identity.Data;
+
+@inject ApplicationDbContext _dbContext
+
+<form method="get" asp-area="" asp-controller="Home" asp-action="Index" class="row mb-5">
+    <div class="col-3">
+        <select class="form-select" name="servicesByCategories">
+
+            <option value="">Sve kategorije</option>
+            @foreach (var categoryItem in _dbContext.Categories.ToList())
+            {
+                <option value="@categoryItem.Id">@categoryItem.Title</option>
+            }
+        </select>
+    </div>
+    <div class="col-3">
+        <input type="submit" class="btn btn-success" value="Kategorije" />
+    </div>
+</form>

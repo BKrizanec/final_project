@@ -1,0 +1,43 @@
+﻿@model FinalProject.Models.Services
+
+@{
+    ViewData["Title"] = "Uredi";
+    ViewData["Description"] = "Uredi detalje predmeta kroz obrazac";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>@ViewData["Description"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Naziv</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Cijena po satu</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Kratki opis</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LecturerId" class="control-label">Predavač</label>
+                <select asp-for="LecturerId" class="form-control" asp-items="ViewBag.LecturerId"></select>
+                <span asp-validation-for="LecturerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Spremi promjene" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-primary">Popis predmeta</a>
+            </div>
+        </form>
+    </div>
+</div>

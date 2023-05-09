@@ -1,0 +1,42 @@
+﻿@model IEnumerable<FinalProject.Models.Lecturer>
+@using FinalProject.Areas.Identity.Data;
+@inject ApplicationDbContext _dbContext
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Popis svih predavača</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary">Dodaj novog predavača</a>
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card col-4 mb-3">
+            <h5 class="card-title">@item.Title</h5>
+            @{
+                string setImage = !String.IsNullOrEmpty(item.Image) ? "~/images/lecturers/" + item.Image : "~/images/default-placeholder.png";
+            }
+            <img src="@Url.Content(setImage)" class="card-img-top" alt="Slika predavača" width="384" height="256">
+            
+            <div class="card-body">                            
+                <h6 class="card-text">Kratka biografija i kontakt:</h6>
+                <p class="card-text">@item.Bio</p>
+                <p class="card-text">@item.ContactEmail</p>
+                           
+                <h6 class="card-text">Predmeti u ponudi: </h6>
+                    @foreach(var service in _dbContext.Services.Where(s => s.LecturerId == item.Id))
+                    {
+                        <p class="card-text">@service.Title</p>
+                    }
+                <a asp-action="Edit" class="btn btn-success" asp-route-id="@item.Id">Uredi</a> 
+                <a asp-action="Details" class="btn btn-success" asp-route-id="@item.Id">Detalji</a> 
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Obriši</a>
+            </div>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FinalProject.Models.Services>
+
+@{
+    ViewData["Title"] = "Popis predmeta i kratki opis";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary">Dodaj novi predmet</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv predmeta
+            </th>
+            <th>
+                Cijena
+            </th>
+            <th>
+                Kratki opis
+            </th>
+            <th>
+                Predavač
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @item.Price.ToString("C2")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lecturer.Title)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-success" asp-route-id="@item.Id">Uredi</a> 
+                <a asp-action="Details" class="btn btn-success" asp-route-id="@item.Id">Detalji</a> 
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Obriši</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
